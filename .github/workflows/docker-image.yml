@@ -17,7 +17,7 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Configure AWS credentials
-      run: docker login --username AWS --password ${{ secrets.ECR_PASSWORD }}
+      run: docker login --username AWS --password-stdin ${{ secrets.ECR_PASSWORD }}
 
     - name: Build, tag, and push image to Amazon ECR
 
