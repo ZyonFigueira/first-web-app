@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-<?php echo gethostname(); ?>
+<?php $hostname = getenv('HTTP_HOST'); ?>
+<p>$hostname</p> 
 </body>
 </html>
