@@ -1,0 +1,26 @@
+name: Deploy to ECR
+
+on:
+ 
+  push:
+    branches: [ "main" ]
+
+jobs:
+  
+  build:
+    
+    name: Build Image
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Check out code
+      uses: actions/checkout@v2
+    
+    - name: Configure AWS credentials
+      run: docker login --username AWS --password ${{ secrets.ECR_PASSWORD }}
+
+    - name: Build, tag, and push image to Amazon ECR
+
+      run: |
+        docker build -t ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest .
+        docker push ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:latest
